@@ -31,7 +31,7 @@ public class Listas {
         lista.add(outroFilme);
         lista.add(lost);
 
-        System.out.println("Primeiro Filme: " + lista.getFirst().getNome());
+        System.out.println("Primeiro Filme: " + lista.get(0).getNome());
         System.out.println("Segundo Filme: " + lista.get(1).getNome());
         System.out.println("Tamanho da Lista de Títulos: " + lista.size() + "\n");
 

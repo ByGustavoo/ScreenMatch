@@ -5,10 +5,11 @@ import br.com.alura.screenmatch.modelos.Produto;
 import br.com.alura.screenmatch.modelos.ProdutoPerecivel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
 
 public class Desafios {
     public static void main(String[] args) {
-
         System.out.println("\n*************** Desafio 1 ***************\n");
 
         var primeiraPessoa = new Pessoa();
@@ -66,5 +67,47 @@ public class Desafios {
 
         System.out.println("\n*************** Method Reference ***************\n");
         nomes.forEach(System.out::println);
+
+        System.out.println("\n*************** Desafio Final ***************\n");
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Digite o Limite do Cartão");
+        double limite = scanner.nextDouble();
+
+        Cartao cartao = new Cartao(limite);
+
+        int opcao = 1;
+
+        while (opcao != 0) {
+
+            System.out.println("\nDigite a Descrição da Compra");
+            scanner.nextLine();
+            String descricao = scanner.nextLine();
+
+            System.out.println("\nDigite o Valor da Compra");
+            double valor = scanner.nextDouble();
+
+            Compra compra = new Compra(descricao, valor);
+            boolean realizaCompra = cartao.registraCompra(compra);
+
+            if (realizaCompra) {
+                System.out.println("\nCompra Realizada com Sucesso!");
+                System.out.println("\nDigite [0] para sair e [1] para continuar");
+                opcao = scanner.nextInt();
+            } else {
+                System.out.println("\nSaldo Insuficiente");
+                opcao = 0;
+            }
+
+            System.out.println("\n*************** Compras Realizadas ***************\n");
+
+            Collections.sort(cartao.getCompras());
+            for (Compra compras : cartao.getCompras()) {
+                System.out.println(compras.getDescricao() + " - " + compras.getValor());
+            }
+
+            System.out.println("\n**************************************************\n");
+            System.out.println("\nSaldo do Cartão: R$" + cartao.getSaldo());
+        }
     }
 }
